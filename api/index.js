@@ -32,35 +32,42 @@ bot.onText(/\/predict/, (msg) => {
 bot.on('message',(msg) => {
     if(state == 1){
         s = msg.text.split("|");
-        x = s[1]
-        y = s[2]
-        z = s[3]
+        x = parseFloat (s[1])
+        y = parseFloat (s[2])
+        z = parseFloat (s[3])
         model.predict(
             [
                 parseFloat (s[1]),
                 parseFloat (s[2]),
                 parseFloat (s[3])
             ]
-        ).then((jres)=>{
-            bot.sendMessage(
-                msg.chat.id,
-                `nilai M1 yang diprediksi adalah ${jres[1]} derajat`  
-            );
-           bot.sendMessage(
-               msg.chat.id,
-               `nilai M2 yang diprediksi adalah ${jres[2]} derajat`
-           );
-            bot.sendMessage(
-               msg.chat.id,
-               `nilai M3 yang diprediksi adalah ${jres[3]} derajat`
-           );
-        })
+        ).then((jres1)=>{
+            console.log(jres1);
+                
+            cls_model.classify([parseFloat(s[1]), parseFloat(s[2]), parseFloat(s[3]), parseFloat(jres1[1]), parseFloat(jres1[2], parseFloat(jres1[3])])=>{
+                bot.sendMessage(
+                    msg.chat.id,
+                    `nilai v yang diprediksi adalah ${jres1[1]} volt`
+                    );
+                bot.sendMessage(
+                    msg.chat.id,
+                    `nilai p yang diprediksi adalah ${jres1[2]} watt`
+                    );
+                bot.sendMessage(
+                    msg.chat.id,
+                    `nilai p yang diprediksi adalah ${jres1[3]} watt`
+                    );
+                    
+            })
+            })
     }else{
-        state = 0
+       bot.sendMessage(
+               msg.chat.id,
+               `please Click /start`
+               );
+            state = 0;
     }
 })
-
-
 // routers
 r.get('/prediction/:x/:y/:z', function(req, res, next) {    
     model.predict(
