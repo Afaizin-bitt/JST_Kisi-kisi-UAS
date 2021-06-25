@@ -1,36 +1,38 @@
 const tf = require('@tensorflow/tfjs-node');
 
-function normalized(data){ // i & r
-    i = (data[0] - 12.585) / 6.813882
-    r = (data[1] - 51.4795) / 29.151289
-    return [i, r]
+function input(data){ // i & r
+    a = (data[1]) 
+    b = (data[2])
+    c = (data[3])
+    return [a, b, c]
 }
 
-function denormalized(data){
-    v = (data[0] * 552.6264) + 650.4795
-    p = (data[1] * 12153.8) + 10620.5615
-    return [v, p]
+function output(data){
+    d = (data[4])
+    e = (data[5])
+    f = (data[6])
+    return [d, e, f]
 }
 
 
 async function predict(data){
-    let in_dim = 2;
+    let in_dim = 3;
     
-    data = normalized(data);
+    data = input(data);
     shape = [1, in_dim];
 
     tf_data = tf.tensor2d(data, shape);
 
     try{
         // path load in public access => github
-        const path = 'https://raw.githubusercontent.com/zendi014/trade_dnn/main/public/model_test/model.json';
+        const path = 'https://raw.githubusercontent.com/Afaizin-bitt/JST_Kisi-kisi-UAS/main/public/Ex-Model/model.jsonhttps://raw.githubusercontent.com/Afaizin-bitt/JST_Kisi-kisi-UAS/main/public/Ex-Model/model.json';
         const model = await tf.loadGraphModel(path);
         
         predict = model.predict(
                 tf_data
         );
         result = predict.dataSync();
-        return denormalized( result );
+        return output( result );
         
     }catch(e){
       console.log(e);
