@@ -9,7 +9,7 @@ const TelegramBot = require('node-telegram-bot-api');
 const token = '1882953763:AAGtAdcnQXNe2bogE17VQjdwmUUcgieYHBU'
 const bot = new TelegramBot(token, {polling: true});
 
-
+state = 0;
 // bots
 bot.onText(/\/start/, (msg) => { 
     console.log(msg)
@@ -18,9 +18,10 @@ bot.onText(/\/start/, (msg) => {
         `hello ${msg.chat.first_name}, welcome...\n
         click /predict to main predict`
     );   
+    state = 0;
 });
 
-state = 0;
+
 bot.onText(/\/predict/, (msg) => { 
         bot.sendMessage(
         msg.chat.id,
@@ -32,9 +33,6 @@ bot.onText(/\/predict/, (msg) => {
 bot.on('message',(msg) => {
     if(state == 1){
         s = msg.text.split("|");
-        x = parseFloat (s[1])
-        y = parseFloat (s[2])
-        z = parseFloat (s[3])
         model.predict(
             [
                 parseFloat (s[1]),
@@ -69,7 +67,7 @@ bot.on('message',(msg) => {
     }
 })
 // routers
-r.get('/prediction/:x/:y/:z', function(req, res, next) {    
+r.get('/predict/:x/:y/:z', function(req, res, next) {    
     model.predict(
         [
             parseFloat(req.params.x), // string to float
