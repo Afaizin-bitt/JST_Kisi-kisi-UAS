@@ -41,7 +41,7 @@ bot.on('message',(msg) => {
         ).then((jres1)=>{
             console.log(jres1);
                 
-            cls_model.predict([parseFloat(s[1]), parseFloat(s[2]), parseFloat(s[3]), parseFloat(jres1[1]), parseFloat(jres1[2])])=>{
+            cls_model.predict([parseFloat(s[1]), parseFloat(s[2]), parseFloat(s[3]), parseFloat(jres1[1]), parseFloat(jres1[2])]).then((jres2)=>{
                 bot.sendMessage(
                     msg.chat.id,
                     `nilai M1 yang diprediksi adalah ${jres1[1]} derajat`
