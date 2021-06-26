@@ -41,18 +41,18 @@ bot.on('message',(msg) => {
         ).then((jres1)=>{
             console.log(jres1);
                 
-            cls_model.predict([parseFloat(s[1]), parseFloat(s[2]), parseFloat(s[3]), parseFloat(jres1[1]), parseFloat(jres1[2])]).then((jres2)=>{
+            cls_model.predict([parseFloat(s[1]), parseFloat(s[2]), parseFloat(s[3]), parseFloat(jres1[1]), parseFloat(jres1[2]), parseFloat(jres1[3])])=>{
                 bot.sendMessage(
                     msg.chat.id,
-                    `nilai v yang diprediksi adalah ${jres1[1]} volt`
+                    `nilai M1 yang diprediksi adalah ${jres1[1]} derajat`
                     );
                 bot.sendMessage(
                     msg.chat.id,
-                    `nilai p yang diprediksi adalah ${jres1[2]} watt`
+                    `nilai M2 yang diprediksi adalah ${jres1[2]} derajat`
                     );
                  bot.sendMessage(
                     msg.chat.id,
-                    `Klasifikasi Tegangan ${jres2}`
+                    `nilai M2 yang diprediksi adalah ${jres1[2]} derajat`
                     );
                     
             })
@@ -63,9 +63,9 @@ bot.on('message',(msg) => {
 r.get('/predict/:x/:y/:z', function(req, res, next) {    
     model.predict(
         [
-            parseFloat(req.params.x), // string to float
-            parseFloat(req.params.y),
-            parseFloat(req.params.z)
+             parseFloat (jres[1]),
+             parseFloat (jres[2]),
+             parseFloat (jres[3])
         ]
     ).then((jres)=>{
         res.json(jres);
