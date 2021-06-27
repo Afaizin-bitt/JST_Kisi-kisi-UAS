@@ -1,11 +1,18 @@
 const tf = require('@tensorflow/tfjs-node');
 
 function normalized(data){ // i & r
-    x = (data[1]) 
-    y = (data[2])
-    z = (data[3])
+    x = (data[0]) 
+    y = (data[1])
+    z = (data[2])
     return [x, y, z]
 }
+function denormalized(data){ // i & r
+    m = (data[0]) 
+    r = (data[1])
+    s = (data[2])
+    return [m, r, s]
+}
+
 
 async function predict(data){
     let in_dim = 3;
@@ -24,7 +31,7 @@ async function predict(data){
                 tf_data
         );
         result = predict.dataSync();
-        return normalized( result );
+        return denormalized( result );
         
     }catch(e){
       console.log(e);
