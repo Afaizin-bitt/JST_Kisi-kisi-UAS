@@ -82,6 +82,7 @@ r.get('/predict/:x/:y/:z', function(req, res, next) {
      ).then((jres)=>{
        res.json({jres, jres_})
     })
+})                
 });
 
 
