@@ -1,9 +1,9 @@
 const tf = require('@tensorflow/tfjs-node');
 
 function normalized(data){ // i & r
-    x = (data[1]) 
-    y = (data[2])
-    z = (data[3])
+    m = (data[1]) 
+    r = (data[2])
+    s = (data[3])
     return [x, y, z]
 }
 
