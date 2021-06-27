@@ -1,10 +1,10 @@
 const tf = require('@tensorflow/tfjs-node');
 
 function normalized(data){ // i & r
-    m = (data[1]) 
-    r = (data[2])
-    s = (data[3])
-    return [m, r, s]
+    x = (data[1]) 
+    y = (data[2])
+    z = (data[3])
+    return [x, y, z]
 }
 
 async function predict(data){
@@ -17,7 +17,7 @@ async function predict(data){
 
     try{
         // path load in public access => github
-        const path = 'https://raw.githubusercontent.com/Afaizin-bitt/JST_Kisi-kisi-UAS/main/api/sdk/model/model.json';
+        const path = 'https://raw.githubusercontent.com/Afaizin-bitt/JST_Kisi-kisi-UAS/main/public/Ex-Model/model.json';
         const model = await tf.loadGraphModel(path);
         
         predict = model.predict(
