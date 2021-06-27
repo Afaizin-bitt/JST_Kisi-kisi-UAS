@@ -68,8 +68,8 @@ r.get('/predict/:x/:y/:z', function(req, res, next) {
             parseFloat(req.params.y),
             parseFloat(req.params.y)
         ]
-    ).then((jres)=>{
-       res.json({jres, jres_})
+    ).then((jres1)=>{
+       res.json({jres1, jres1_})
     })            
 });
 
