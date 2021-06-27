@@ -39,9 +39,6 @@ bot.on('message',(msg) => {
                 parseFloat (s[3])
             ]
         ).then((jres1)=>{
-            console.log(jres1);
-                
-            cls_model.predict([parseFloat(s[1]), parseFloat(s[2]), parseFloat(s[3]), parseFloat(jres1[1]), parseFloat(jres1[2])]).then((jres2)=>{
                 bot.sendMessage(
                     msg.chat.id,
                     `nilai M1 yang diprediksi adalah ${jres1[1]} derajat`
@@ -50,17 +47,23 @@ bot.on('message',(msg) => {
                     msg.chat.id,
                     `nilai M2 yang diprediksi adalah ${jres1[2]} derajat`
                     );
-                    
+                bot.sendMessage(
+                        msg.chat.id,
+                        `nilai M2 yang diprediksi adalah ${jres1[3]} derajat`
+                        );
+                        
             })
-            })
+            
     }
 })
+
 // routers
 r.get('/predict/:x/:y/:z', function(req, res, next) {    
     model.predict(
         [
              parseFloat (jres[1]),
              parseFloat (jres[2]),
+             parseFloat (jres[3]),
         ]
     ).then((jres)=>{
         res.json(jres);
