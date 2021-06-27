@@ -4,7 +4,7 @@ function normalized(data){ // i & r
     m = (data[1]) 
     r = (data[2])
     s = (data[3])
-    return [x, y, z]
+    return [m, r, s]
 }
 
 async function predict(data){
