@@ -61,15 +61,19 @@ bot.on('message',(msg) => {
 })
 
 // routers
-r.get('/predict/:x/:y/:z', function(req, res, next) {    
-    model.predict(
-        [
-             parseFloat (jres[1]),
-             parseFloat (jres[2]),
-             parseFloat (jres[3]),
-        ]
-    ).then((jres)=>{
-        res.json(jres);
+r.get('/predict/:x/:y/:z', function(req, res, next).then((jres)=>{    
+           model.predict(
+            [
+                parseFloat (req.params.x),
+                parseFloat (req.params.y),
+                parseFloat (req.params.z),
+                parseFloat (jres[0]),
+                parseFloat (jres[2]),
+                parseFloat (jres[3])
+                ]
+     
+     ).then((jres)=>{
+       res.json({jres, jres_})
     })
 });
 
