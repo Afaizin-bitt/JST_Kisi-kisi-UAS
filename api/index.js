@@ -62,7 +62,7 @@ bot.on('message',(msg) => {
 
 // routers
 r.get('/predict/:x/:y/:z', function(req, res, next) {    
-            model.predicts(
+            model.predict(
         [
             parseFloat(req.params.x), // string to float
             parseFloat(req.params.y),
